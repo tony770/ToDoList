@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    background-color: rgb(80, 188, 188);
+}
+
+.title {
+    align-self: center;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    margin: 10px 0;
+    font-size: 20px;
+    background-color: transparent;
+}
+
+button:hover {
+    background-color: bisque;
+}
+
+.folderBtn {
+    margin-top: auto;
+}
