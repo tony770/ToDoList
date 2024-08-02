@@ -7,15 +7,25 @@ const projectNameInput = document.getElementById('projectName');
 
 const addFolder = () => {
     const projectName = projectNameInput.value;
-    const newClassName = projectName.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+    const newClassName = projectName.split(' ').map(word => word.charAt(0).toUpperCase()).join('') + `${sidebar.children.length + 1}`;
     if(projectName) {
+        const folderDiv = document.createElement('div');
+        folderDiv.classList.add('folderBtnContainer');
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add(newClassName, 'deleteFolder');
+        deleteBtn.textContent = 'X';
+        folderDiv.appendChild(deleteBtn);
+    
         const newBtn = document.createElement('button');
-        newBtn.classList.add('projectBtn', newClassName);
+        newBtn.classList.add('projectBtn');
+        newBtn.id = newClassName;
         newBtn.textContent = projectName;
-        newBtn.id = `project${sidebar.children.length + 1}`;
         storeButton(newBtn);
-        lastBtn.parentNode.insertBefore(newBtn, folderBtn);
-        lastBtn = newBtn;
+        folderDiv.appendChild(newBtn);
+
+        lastBtn.parentNode.insertBefore(folderDiv, folderBtn);
+        lastBtn = folderDiv;
         projectModal.style.display = 'none';
     }
 } 
@@ -32,14 +42,34 @@ function storeButton(button) {
 function loadButtons() {
     const buttons = JSON.parse(localStorage.getItem('buttons')) || [];
     buttons.forEach(buttonData => {
+        const folderDiv = document.createElement('div');
+        folderDiv.classList.add('folderBtnContainer');
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add(buttonData.id, 'deleteFolder');
+        deleteBtn.textContent = 'X';
+        folderDiv.appendChild(deleteBtn);
+
         const storedButton = document.createElement('button');
-        storedButton.classList.add('projectBtn', buttonData.projectName)
+        storedButton.classList.add('projectBtn')
         storedButton.id = buttonData.id;
         storedButton.textContent = buttonData.projectName;
-        lastBtn.parentNode.insertBefore(storedButton, folderBtn);
-        lastBtn = storedButton;
+        folderDiv.appendChild(storedButton);
+
+        lastBtn.parentNode.insertBefore(folderDiv, folderBtn);
+        lastBtn = folderDiv;
     })
 }
 
+function deleteFolder(folderID) {
+    let buttons = JSON.parse(localStorage.getItem('buttons')) || [];
+    buttons = buttons.filter(button => button.id !== folderID);
+    localStorage.setItem('buttons', JSON.stringify(buttons));
 
-export { addFolder, loadButtons };
+    const folderDiv = document.getElementById(folderID)?.parentElement;
+    if(folderDiv) {
+        folderDiv.remove();
+    }
+}
+
+export { addFolder, loadButtons, deleteFolder };

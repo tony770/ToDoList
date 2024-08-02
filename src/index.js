@@ -1,5 +1,5 @@
 import './style.css';
-import { addFolder, loadButtons } from './addFolder.js';
+import { addFolder, loadButtons, deleteFolder } from './addFolder.js';
 
 const homeBtn = document.querySelector('.home');
 const folderBtn = document.querySelector('.folderBtn');
@@ -25,8 +25,18 @@ window.onclick = function(event) {
     }
 }
 
+function initializeEventListeners() {
+    document.querySelectorAll('.deleteFolder').forEach(button => {
+        button.addEventListener('click', () => {
+            const FolderID = event.target.classList[0];
+            deleteFolder(FolderID);
+        });
+    });
+}
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
     loadButtons();
+    initializeEventListeners();
 })
