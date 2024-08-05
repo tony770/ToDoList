@@ -91,4 +91,13 @@ body {
     height: 40%;
     width: 22%;
     margin: 5px;
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
 }
+
+.todoModalContent {
+    display: flex;
+    flex-direction: column;
+}
+

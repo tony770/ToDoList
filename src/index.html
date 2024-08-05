@@ -6,11 +6,13 @@
     <title>ToDo List</title>
 </head>
 <body>
+
     <div class="sidebar">
         <h2 class="title">ToDo List</h2>
-        <button class="home projectBtn">All Notes</button>
+        <button class="projectBtn" id="home">All Notes</button>
         <button class="folderBtn">Add Folder</button>
     </div>
+
     <div class="projectModal modal">
         <div class="modalContent">
             <span class="close">&times;</span>
@@ -19,14 +21,38 @@
             <button id="submitName">Create</button>
         </div>
     </div>
+
     <div class="mainContainer">
+        <div class="todoCard">
+            <h2>Groceries</h2>
+            <div>
+                <input type="checkbox" id="todo1">
+                <label for="todo1">Eggs</label>
+            </div>
+            <div>
+                <input type="checkbox" id="todo2">
+                <label for="todo2">Milk</label>
+            </div>
+            <div>
+                <input type="checkbox" id="todo3">
+                <label for="todo3">Rice</label>
+            </div>
+        </div>
         <button class="addListBtn todoCard">+</button>
     </div>
+
     <div class="todoModal modal">
-        <div class="modalContent">
+        <div class="modalContent todoModalContent">
             <span class="close">&times;</span>
-            <p>Todo List Name</p>
-            <input type="text" id="todoName">
+            <div>
+                <p>Todo List Name</p>
+                <input type="text" id="todoName">
+            </div>
+            <div>
+                <p>Add Todo</p>
+                <input type="text" id="addTodo">
+                <button>+</button>
+            </div>
             <button id="createTodo">Create</button>
         </div>
     </div>
