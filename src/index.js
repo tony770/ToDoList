@@ -1,7 +1,8 @@
 import './style.css';
 import { addFolder, loadButtons, deleteFolder } from './addFolder.js';
 import { hideModal, showModal } from './modal.js';
-import { addTodo } from './addTodo.js'
+import { addTodoList } from './addTodo.js';
+import { addTodoInput } from './todoModal.js';
 
 const homeBtn = document.getElementById('home');
 const folderBtn = document.querySelector('.folderBtn');
@@ -12,6 +13,8 @@ const todoModal = document.querySelector('.todoModal');
 const addListBtn = document.querySelector('.addListBtn');
 const createTodoBtn = document.getElementById('createTodo');
 const projectBtn = document.querySelectorAll('.projectBtn');
+let currFolderID = home;
+const addTodoButton = document.querySelector('.addTodoButton');
 
 folderBtn.addEventListener('click', () => {
     showModal(projectModal);
@@ -26,7 +29,11 @@ addListBtn.addEventListener('click', () => {
 })
 
 createTodoBtn.addEventListener('click', () => {
-    addTodo();
+    addTodoList(currFolderID);
+})
+
+addTodoButton.addEventListener('click', () => {
+    addTodoInput();
 })
 
 
@@ -57,9 +64,12 @@ function initializeEventListeners() {
     });
 
     projectBtn.forEach(btn => {
-        projectBtn.forEach(button => button.classList.remove('active'));
+        btn.addEventListener('click', () => {
+            projectBtn.forEach(button => button.classList.remove('active'));
 
-        btn.classList.add('active')
+            currFolderID = btn.id;
+        })
+        
     })
 }
 

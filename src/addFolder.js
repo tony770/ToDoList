@@ -1,4 +1,3 @@
-const sidebar = document.querySelector('.sidebar');
 const homeBtn = document.getElementById('home');
 const folderBtn = document.querySelector('.folderBtn');
 let lastBtn = homeBtn;
