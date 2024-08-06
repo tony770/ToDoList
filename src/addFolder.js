@@ -14,6 +14,7 @@ const addFolder = () => {
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add(newClassName, 'deleteFolder');
         deleteBtn.textContent = 'X';
+        deleteBtn.addEventListener('click', () => deleteFolder(newClassName));
         folderDiv.appendChild(deleteBtn);
     
         const newBtn = document.createElement('button');
@@ -27,6 +28,7 @@ const addFolder = () => {
         lastBtn.parentNode.insertBefore(folderDiv, folderBtn);
         lastBtn = folderDiv;
         projectModal.style.display = 'none';
+        projectNameInput.value = '';
     }
 } 
 
@@ -48,6 +50,7 @@ function loadButtons() {
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add(buttonData.id, 'deleteFolder');
         deleteBtn.textContent = 'X';
+        deleteBtn.addEventListener('click', () => deleteFolder(buttonData.id));
         folderDiv.appendChild(deleteBtn);
 
         const storedButton = document.createElement('button');
@@ -70,6 +73,7 @@ function deleteFolder(folderID) {
     if(folderDiv) {
         folderDiv.remove();
     }
+    lastBtn = document.querySelector('.folderBtnContainer:last-child') || homeBtn;
 }
 
 export { addFolder, loadButtons, deleteFolder };
