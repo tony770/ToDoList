@@ -6,16 +6,14 @@
     <title>ToDo List</title>
 </head>
 <body>
+
     <div class="sidebar">
         <h2 class="title">ToDo List</h2>
-        <button class="home projectBtn">All Notes</button>
-        <div class="folderBtnContainer">
-            <button class="deleteFolder">X</button>
-            <button class="projectBtn">TestButton</button>
-        </div>
+        <button class="projectBtn" id="home">All Notes</button>
         <button class="folderBtn">Add Folder</button>
     </div>
-    <div class="projectModal">
+
+    <div class="projectModal modal">
         <div class="modalContent">
             <span class="close">&times;</span>
             <p>Enter New Project Name</p>
@@ -23,8 +21,42 @@
             <button id="submitName">Create</button>
         </div>
     </div>
+
     <div class="mainContainer">
+        <div class="todoCard">
+            <h2>Groceries</h2>
+            <div class="listItems">
+                <div>
+                    <input type="checkbox" id="todo1">
+                    <label for="todo1">Eggs</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="todo2">
+                    <label for="todo2">Milk</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="todo3">
+                    <label for="todo3">Rice</label>
+                </div>
+            </div>
+        </div>
         <button class="addListBtn todoCard">+</button>
+    </div>
+
+    <div class="todoModal modal">
+        <div class="modalContent todoModalContent">
+            <span class="close">&times;</span>
+            <div>
+                <p>Todo List Name</p>
+                <input type="text" id="todoName">
+            </div>
+            <div class="todoItems">
+                <p>Add Todo</p>
+                <input type="text" id="todoInput">
+            </div>
+            <button class="addTodoButton">+</button>
+            <button id="createTodo" type="submit">Create</button>
+        </div>
     </div>
 </body>
 </html>

@@ -24,7 +24,7 @@ body {
     background-color: transparent;
 }
 
-.folderBtnContainer:hover, .folderBtn:hover {
+.folderBtnContainer:hover, .folderBtn:hover, .home:hover {
     background-color: rgb(228, 206, 153);
 }
 
@@ -32,7 +32,7 @@ body {
     margin-top: auto;
 }
 
-.projectModal  {
+.projectModal, .todoModal  {
     display: none;
     position: fixed;
     z-index: 1;
@@ -91,4 +91,13 @@ body {
     height: 40%;
     width: 22%;
     margin: 5px;
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
 }
+
+.todoModalContent {
+    display: flex;
+    flex-direction: column;
+}
+

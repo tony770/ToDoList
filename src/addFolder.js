@@ -1,5 +1,4 @@
-const sidebar = document.querySelector('.sidebar');
-const homeBtn = document.querySelector('.home');
+const homeBtn = document.getElementById('home');
 const folderBtn = document.querySelector('.folderBtn');
 let lastBtn = homeBtn;
 const projectModal = document.querySelector('.projectModal');
@@ -7,7 +6,7 @@ const projectNameInput = document.getElementById('projectName');
 
 const addFolder = () => {
     const projectName = projectNameInput.value;
-    const newClassName = projectName.split(' ').map(word => word.charAt(0).toUpperCase()).join('') + `${sidebar.children.length + 1}`;
+    const newClassName = projectName.split(' ').map(word => word.charAt(0).toUpperCase()).join('') + Date.now();
     if(projectName) {
         const folderDiv = document.createElement('div');
         folderDiv.classList.add('folderBtnContainer');
@@ -15,18 +14,21 @@ const addFolder = () => {
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add(newClassName, 'deleteFolder');
         deleteBtn.textContent = 'X';
+        deleteBtn.addEventListener('click', () => deleteFolder(newClassName));
         folderDiv.appendChild(deleteBtn);
     
         const newBtn = document.createElement('button');
         newBtn.classList.add('projectBtn');
         newBtn.id = newClassName;
         newBtn.textContent = projectName;
-        storeButton(newBtn);
         folderDiv.appendChild(newBtn);
 
+        storeButton(newBtn);
+        
         lastBtn.parentNode.insertBefore(folderDiv, folderBtn);
         lastBtn = folderDiv;
         projectModal.style.display = 'none';
+        projectNameInput.value = '';
     }
 } 
 
@@ -48,6 +50,7 @@ function loadButtons() {
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add(buttonData.id, 'deleteFolder');
         deleteBtn.textContent = 'X';
+        deleteBtn.addEventListener('click', () => deleteFolder(buttonData.id));
         folderDiv.appendChild(deleteBtn);
 
         const storedButton = document.createElement('button');
@@ -70,6 +73,7 @@ function deleteFolder(folderID) {
     if(folderDiv) {
         folderDiv.remove();
     }
+    lastBtn = document.querySelector('.folderBtnContainer:last-child') || homeBtn;
 }
 
 export { addFolder, loadButtons, deleteFolder };
