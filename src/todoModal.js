@@ -21,4 +21,20 @@ function addTodoInput() {
     }
 };
 
-export { addTodoInput };
+function getTodoItems() {
+    const todoInputs = document.querySelectorAll('.todoInput');
+    const todos = [];
+
+    todoInputs.forEach(input => {
+        if(input.value.trim() !== '')
+        {
+            todos.push(input.value.trim());
+        }
+    })
+
+    return todos;
+}
+
+export { addTodoInput, getTodoItems };
+
+
