@@ -4,6 +4,8 @@ function newInput() {
     newInputElement.type = 'text';
     newInputElement.classList.add('todoInput');
     todoItems.appendChild(newInputElement);
+
+    newInputElement.focus();
 };
 
 function addTodoInput() {
@@ -32,6 +34,7 @@ function getTodoItems() {
         }
     })
 
+    console.log('todo items: ', todos);
     return todos;
 }
 

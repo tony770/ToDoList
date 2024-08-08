@@ -5,14 +5,34 @@ const addListBtn = document.querySelector('.addListBtn');
 const todoListName = document.getElementById('todoName');
 
 function addTodoList(folderID) {
-    const listName = todoListName.value;
-    const todoCard = createTodoCard(listName);
+    const listName = todoListName.value.trim();
+    const todoCard = createTodoCard(listName, folderID);
     const todoItemsArray = getTodoItems();
+    
+    for(let i = 0; i < todoItemsArray.length; i++)
+    {
+        const itemDiv = document.createElement('div');
+
+        const itemCheckbox = document.createElement('input');
+        itemCheckbox.type = 'checkbox';
+        itemCheckbox.id = 'todo' + (i + 1);
+
+        const itemLabel = document.createElement('label');
+        itemLabel.setAttribute('for', itemCheckbox.id);
+        itemLabel.textContent = todoItemsArray[i];
+
+        itemDiv.appendChild(itemCheckbox);
+        itemDiv.appendChild(itemLabel);
+
+        todoCard.querySelector('.listItems').appendChild(itemDiv);
+    }
+    mainContainer.insertBefore(todoCard, addListBtn);
 }
 
-function createTodoCard(listName) {
+function createTodoCard(listName, folderID) {
     const todoCard = document.createElement('div');
     todoCard.classList.add('todoCard');
+    todoCard.id = folderID;
 
     const listTitle = document.createElement('h2');
     listTitle.textContent = listName;
