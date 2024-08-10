@@ -4,7 +4,7 @@ import { hideModal, showModal } from './modal.js';
 import { addTodoList } from './addTodo.js';
 import { addTodoInput } from './todoModal.js';
 
-const homeBtn = document.getElementById('home');
+const homeBtn = document.getElementById('mainPage');
 const folderBtn = document.querySelector('.folderBtn');
 const projectModal = document.querySelector('.projectModal');
 const submitBtn = document.getElementById('submitName');
@@ -13,7 +13,7 @@ const todoModal = document.querySelector('.todoModal');
 const addListBtn = document.querySelector('.addListBtn');
 const createTodoBtn = document.getElementById('createTodo');
 const projectBtn = document.querySelectorAll('.projectBtn');
-let currFolderID = home;
+let currFolderID = homeBtn.id;
 const addTodoButton = document.querySelector('.addTodoButton');
 
 folderBtn.addEventListener('click', () => {
@@ -78,4 +78,5 @@ function initializeEventListeners() {
 document.addEventListener('DOMContentLoaded', () => {
     loadButtons();
     initializeEventListeners();
+    //localStorage.clear();
 })
