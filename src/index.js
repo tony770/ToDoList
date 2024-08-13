@@ -1,7 +1,7 @@
 import './style.css';
 import { addFolder, loadButtons, deleteFolder } from './addFolder.js';
 import { hideModal, showModal } from './modal.js';
-import { addTodoList } from './addTodo.js';
+import { addTodoList, loadCards } from './addTodo.js';
 import { addTodoInput } from './todoModal.js';
 
 const homeBtn = document.getElementById('mainPage');
@@ -12,9 +12,9 @@ const close = document.getElementsByClassName('close');
 const todoModal = document.querySelector('.todoModal');
 const addListBtn = document.querySelector('.addListBtn');
 const createTodoBtn = document.getElementById('createTodo');
-const projectBtn = document.querySelectorAll('.projectBtn');
 let currFolderID = homeBtn.id;
 const addTodoButton = document.querySelector('.addTodoButton');
+const cardContainer = document.querySelector('.cardContainer');
 
 folderBtn.addEventListener('click', () => {
     showModal(projectModal);
@@ -63,11 +63,15 @@ function initializeEventListeners() {
         });
     });
 
-    projectBtn.forEach(btn => {
+    const projectBtns = document.querySelectorAll('.projectBtn');
+    projectBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            projectBtn.forEach(button => button.classList.remove('active'));
-
+            projectBtns.forEach(button => button.classList.remove('active'));
+            cardContainer.textContent = '';
+            btn.classList.add('active')
             currFolderID = btn.id;
+            console.log('Clicked button ID:', currFolderID);
+            loadCards(currFolderID)
         })
         
     })
@@ -78,5 +82,6 @@ function initializeEventListeners() {
 document.addEventListener('DOMContentLoaded', () => {
     loadButtons();
     initializeEventListeners();
+    loadCards(currFolderID);
     //localStorage.clear();
 })

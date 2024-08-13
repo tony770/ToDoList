@@ -1,4 +1,4 @@
-const homeBtn = document.getElementById('home');
+const homeBtn = document.getElementById('mainPage');
 const folderBtn = document.querySelector('.folderBtn');
 let lastBtn = homeBtn;
 const projectModal = document.querySelector('.projectModal');

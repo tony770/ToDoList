@@ -1,12 +1,12 @@
 import { getTodoItems } from "./todoModal";
 
-const mainContainer = document.querySelector('.mainContainer');
-const addListBtn = document.querySelector('.addListBtn');
+const cardContainer = document.querySelector('.cardContainer');
 const todoListName = document.getElementById('todoName');
 
 function addTodoList(folderID) {
     const listName = todoListName.value.trim();
     const todoCard = createTodoCard(listName, folderID);
+    storeTodoCard(todoCard);
     const todoItemsArray = getTodoItems();
     const cardIdentifier = todoCard.classList[1];
     
@@ -30,7 +30,7 @@ function addTodoList(folderID) {
         todoCard.querySelector('.listItems').appendChild(itemDiv);
     }
     
-    mainContainer.insertBefore(todoCard, addListBtn);
+    cardContainer.appendChild(todoCard);
 }
 
 function createTodoCard(listName, folderID) {
@@ -47,7 +47,6 @@ function createTodoCard(listName, folderID) {
     inputDiv.classList.add('listItems');
     todoCard.appendChild(inputDiv);
 
-    storeTodoCard(todoCard);
     return todoCard;
 }
 
@@ -71,9 +70,44 @@ function storeItems(item) {
     localStorage.setItem('items', JSON.stringify(items));
 }
 
-export { addTodoList };
+function loadCards(folderID) {
+    const cards = JSON.parse(localStorage.getItem('cards')) || [];
+    cards.forEach(card => {
+        if(card.id === folderID)
+        {
+            const todoCard = createTodoCard(card.cardName, card.id);
+            loadItems(todoCard, card.cardIdentifier);
+            cardContainer.appendChild(todoCard);
+        }
+    });
+}
+
+function loadItems(todoCard, cardIdentifier) {
+    let itemCount = 1;
+    const items = JSON.parse(localStorage.getItem('items')) || [];
+    const matchedItems = items.filter(item => item.itemIdentifier === cardIdentifier);
+    matchedItems.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add(item.itemIdentifier);
+
+        const itemCheckbox = document.createElement('input');
+        itemCheckbox.type = 'checkbox';
+        itemCheckbox.id = 'todo' + itemCount;
+        itemCount++;
+
+        const itemLabel = document.createElement('label');
+        itemLabel.setAttribute('for', itemCheckbox.id);
+        itemLabel.textContent = item.itemContent;
+
+        itemDiv.appendChild(itemCheckbox);
+        itemDiv.appendChild(itemLabel);
+
+        todoCard.querySelector('.listItems').appendChild(itemDiv);
+    })
+}
+
+export { addTodoList, loadCards };
 
 /*      
-    loadItems and loadCard next
-    maybe can do this in one function or 2
+    add delete list function
 */
